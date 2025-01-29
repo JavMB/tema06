@@ -132,9 +132,67 @@ public class GestionAlumnos {
     public void porGrupo(Scanner sc) {
         System.out.println("Dime el grupo");
         int grupo = sc.nextInt();
-
+        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n","NIA","Nombre","Apellido","Fecha",
+                "Grupo","Telefono");
         for (Alumno alumno : alumnos) {
             if (alumno != null && alumno.getGrupo() == grupo) {
+                System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n",
+                        alumno.getNia(),
+                        alumno.getNombre(),
+                        alumno.getApellido(),
+                        alumno.getFechanacimiento(),
+                        alumno.getGrupo(),
+                        alumno.getTelefono());
+            }
+        }
+
+    }
+
+    public void porNia(Scanner sc) {
+        System.out.println("Dime el NIA");
+        String nia = sc.nextLine();
+        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n","NIA","Nombre","Apellido","Fecha",
+                "Grupo","Telefono");
+        for (Alumno alumno : alumnos) {
+            if (alumno != null && alumno.getNia().equals(nia)) {
+                System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n",
+                        alumno.getNia(),
+                        alumno.getNombre(),
+                        alumno.getApellido(),
+                        alumno.getFechanacimiento(),
+                        alumno.getGrupo(),
+                        alumno.getTelefono());
+            }
+        }
+
+    }
+
+    public void porApellido(Scanner sc) {
+        System.out.println("Dime el apellido");
+        String apellido = sc.nextLine();
+        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n","NIA","Nombre","Apellido","Fecha",
+                "Grupo","Telefono");
+        for (Alumno alumno : alumnos) {
+            if (alumno != null && alumno.getApellido().equals(apellido)) {
+                System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n",
+                        alumno.getNia(),
+                        alumno.getNombre(),
+                        alumno.getApellido(),
+                        alumno.getFechanacimiento(),
+                        alumno.getGrupo(),
+                        alumno.getTelefono());
+            }
+        }
+
+    }
+
+    public void porEdad(Scanner sc) {
+        System.out.println("Dime la edad");
+        LocalDate edad = LocalDate.parse(sc.nextLine());
+        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n","NIA","Nombre","Apellido","Fecha",
+                "Grupo","Telefono");
+        for (Alumno alumno : alumnos) {
+            if (alumno != null && alumno.getFechanacimiento().isEqual(edad)) {
                 System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n",
                         alumno.getNia(),
                         alumno.getNombre(),
@@ -164,35 +222,34 @@ public class GestionAlumnos {
 
         alumnos1.generarAlumnos(20, new Random(), nombres, apellidos);
 
-        alumnos1.porGrupo(new Scanner(System.in));
 
-//        int opcion, opcion2;
-//
-//        do {
-//
-//            opcion = menuAlumnos();
-//
-//            switch (opcion) {
-//                case 1 -> alumnos1.nuevoAlumno(new Scanner(System.in));
-//                case 2 -> alumnos1.borrarAlumno(new Scanner(System.in));
-//                case 3 -> {
-//                    do {
-//                        opcion2 = menuConsultas();
-//
-//                        switch (opcion2) {
-//                            case 1 -> alumnos1.porGrupo(new Scanner(System.in));
-//                            case 2 -> ;
-//                            case 3 -> ;
-//                            case 4 -> ;
-//
-//                        }
-//                    } while (opcion2 != 0);
-//                }
-//
-//            }
-//
-//
-//        } while (opcion != 0);
+        int opcion, opcion2;
+
+        do {
+
+            opcion = menuAlumnos();
+
+            switch (opcion) {
+                case 1 -> alumnos1.nuevoAlumno(new Scanner(System.in));
+                case 2 -> alumnos1.borrarAlumno(new Scanner(System.in));
+                case 3 -> {
+                    do {
+                        opcion2 = menuConsultas();
+
+                        switch (opcion2) {
+                            case 1 -> alumnos1.porGrupo(new Scanner(System.in));
+                            case 2 -> alumnos1.porEdad(new Scanner(System.in));
+                            case 3 -> alumnos1.porNia(new Scanner(System.in));
+                            case 4 -> alumnos1.porApellido(new Scanner(System.in));
+
+                        }
+                    } while (opcion2 != 0);
+                }
+
+            }
+
+
+        } while (opcion != 0);
 
 
     }
