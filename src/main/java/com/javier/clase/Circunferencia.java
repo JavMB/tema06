@@ -32,6 +32,9 @@ public class Circunferencia {
     }
 
     public void setRadio(double radio) {
+        if (radio <= 0) {
+            throw new IllegalArgumentException("El radio debe ser un número positivo.");
+        }
         this.radio = radio;
     }
 
@@ -52,7 +55,7 @@ public class Circunferencia {
         if (centro.equals(new Punto(0, 0))) {
             return "Circunferencia de radio" + radio + " cm situada en el origen de cordenadas";
 
-        } else return "Circunferencia de radio " + radio + " cm situado en el punto " + centro;
+        } else return "Circunferencia de radio " + radio + " cm situada en el punto " + centro;
 
 
     }
