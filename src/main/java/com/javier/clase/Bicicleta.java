@@ -22,4 +22,74 @@ public class Bicicleta {
         this.precio = precio;
     }
 
+
+    public int getREF() {
+        return REF;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public float getPeso() {
+        return peso;
+    }
+
+    public void setPeso(float peso) {
+        this.peso = peso;
+    }
+
+    public float getRuedasSize() {
+        return ruedasSize;
+    }
+
+    public void setRuedasSize(float ruedasSize) {
+        this.ruedasSize = ruedasSize;
+    }
+
+    public boolean isHasMotor() {
+        return hasMotor;
+    }
+
+    public void setHasMotor(boolean hasMotor) {
+        this.hasMotor = hasMotor;
+    }
+
+    public LocalDate getFechaFab() {
+        return fechaFab;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    @Override
+    public String toString() {
+        return "Bicicleta{" +
+                "REF=" + REF +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", peso=" + peso +
+                ", ruedasSize=" + ruedasSize +
+                ", hasMotor=" + hasMotor +
+                ", fechaFab=" + fechaFab +
+                ", precio=" + precio +
+                '}';
+    }
 }
