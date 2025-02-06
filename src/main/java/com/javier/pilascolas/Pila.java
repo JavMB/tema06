@@ -44,8 +44,8 @@ public class Pila {
         if (isFull()) {
             expand();
         }
-        data[size] = e;
-        size++;
+        data[size++] = e;
+
     }
 
     /**

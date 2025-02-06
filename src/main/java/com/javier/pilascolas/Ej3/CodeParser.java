@@ -1,8 +1,10 @@
-package com.javier.pilascolas;
+package com.javier.pilascolas.Ej3;
 import com.javier.lib.Escaner;
+import com.javier.pilascolas.Pila;
+
 import java.io.File;
 
-public class Ej3Pila {
+public class CodeParser {
     public enum APERTURAS {
         LLAVE('{', 1),
         CORCHETE('[', 3),
