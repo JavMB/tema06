@@ -18,16 +18,16 @@ public class Paciente {
 
         int numero = rnd.nextInt(100000000, 999999999);
 
-        // Calcular el dígito de control como la suma de los dígitos módulo 10
+
         int suma = 0;
         int temp = numero;
 
         while (temp > 0) {
-            suma += temp % 10;  // Sumar cada dígito
+            suma += temp % 10;
             temp /= 10;
         }
 
-        int digitoControl = suma % 10; // Último dígito de la suma como dígito de control
+        int digitoControl = suma % 10;
 
         return numero + String.valueOf(digitoControl);
     }

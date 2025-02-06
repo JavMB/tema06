@@ -12,7 +12,7 @@ public class Medico {
 
     public Medico(String nombre) {
         this.nombre = nombre;
-        this.numeroColegiado = String.valueOf(rnd.nextInt(1000000)); // Número aleatorio con hasta 6 dígitos
+        this.numeroColegiado = String.valueOf(rnd.nextInt(1000000));
     }
 
 }
