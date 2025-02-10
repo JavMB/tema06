@@ -32,7 +32,8 @@ public class Paciente {
         return numero + String.valueOf(digitoControl);
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

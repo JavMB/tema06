@@ -15,4 +15,8 @@ public class Medico {
         this.numeroColegiado = String.valueOf(rnd.nextInt(1000000));
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

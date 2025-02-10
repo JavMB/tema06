@@ -1,5 +1,4 @@
 package com.javier.pilascolas.Ej7;
-
 import java.util.Scanner;
 
 public class Hospital {
@@ -22,23 +21,40 @@ public class Hospital {
         return sc.nextInt();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hospital{\n");
+
+        int contador = 1;
+        for (ColaConsulta consulta : consultas) {
+            sb.append("  ").append(contador).append(". ").append(consulta.toString()).append("\n");
+            contador++;
+        }
+
+        sb.append("}");
+        return sb.toString();
+    }
+
+    public void añadirPaciente(Scanner sc) {
+        System.out.println(this);
+        int opcion = sc.nextInt();
+        consultas[opcion].llegadaPaciente(sc);
+        System.out.println(consultas[opcion]);
+    }
+
+    public void atenderPaciente(Scanner sc) {
+        System.out.println(this);
+        int opcion = sc.nextInt();
+        System.out.println(consultas[opcion].atenderPaciente());
+        System.out.println(consultas[opcion]);
+    }
+
 
     public static void main(String[] args) {
         Hospital h1 = new Hospital(5);
         Scanner sc = new Scanner(System.in);
-        Medico m1 = new Medico("Juan");
-        Medico m2 = new Medico("Pepe");
-        Medico m3 = new Medico("Pablo");
-        Medico m4 = new Medico("Pepe");
-        Medico m5 = new Medico("Ernesto");
-        Medico[] medicos = new Medico[]{m1, m2, m3, m4, m5};
-        ColaConsulta c1 = new ColaConsulta(m1);
-        ColaConsulta c2 = new ColaConsulta(m2);
-        ColaConsulta c3 = new ColaConsulta(m3);
-        ColaConsulta c4 = new ColaConsulta(m4);
-        ColaConsulta c5 = new ColaConsulta(m5);
-
-        ColaConsulta[] cola = new ColaConsulta[]{c1, c2, c3, c4, c5};
+        ColaConsulta[] cola = getColaConsultas();
         for (ColaConsulta consulta : cola) {
             for (int i = 0; i < 5; i++) {
                 consulta.llegadaPaciente(sc);
@@ -46,8 +62,34 @@ public class Hospital {
         }
         h1.setConsultas(cola);
 
+        System.out.println(h1);
 
+        do {
+            switch (h1.menuHospital(sc)) {
+                case 1 -> h1.añadirPaciente(sc);
+                case 2 -> h1.atenderPaciente(sc);
+                case 3 -> System.out.println(h1);
+                case 4 -> {
+                    return;
+                }
+                default -> System.out.println("Elige bien");
+            }
+        } while (true);
 
 
     }
+
+
+    private static ColaConsulta[] getColaConsultas() {
+        String[] nombres = {"Juan", "Javi", "Pablo", "Pepe", "Ernesto"};
+        ColaConsulta[] consultas = new ColaConsulta[nombres.length];
+
+        for (int i = 0; i < nombres.length; i++) {
+            consultas[i] = new ColaConsulta(new Medico(nombres[i]));
+        }
+        return consultas;
+    }
+
+
+
 }

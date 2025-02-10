@@ -14,7 +14,7 @@ public class ColaConsulta {
         this.cola = new ArrayDeque<>();
     }
 
-    // Método para añadir un paciente al final de la cola
+    // añadir un paciente
     public void agregarPaciente(Paciente paciente) {
         cola.addLast(paciente);
     }
@@ -30,18 +30,18 @@ public class ColaConsulta {
 
     }
 
-    // Método para atender al siguiente paciente (elimina y devuelve el primero de la cola)
+    // atender al siguiente paciente
     public Paciente atenderPaciente() {
         return cola.pollFirst();
     }
 
-    // Método para ver el siguiente paciente sin quitarlo de la cola
-    public Paciente verSiguientePaciente() {
-        return cola.peekFirst();
+
+    @Override
+    public String toString() {
+        return "Consulta{" +
+                "medico=" + medico +
+                ", pacientes=" + cola.toString() +
+                '}';
     }
 
-    // Método para ver si la cola está vacía
-    public boolean estaVacia() {
-        return cola.isEmpty();
-    }
 }
