@@ -17,7 +17,7 @@ public class Coche {
     }
 
     // Atributos
-    private static int cont=0;
+    private static int cont = 0;
     private String modelo;
     private String color;
     private boolean esMetalizada;
@@ -26,7 +26,7 @@ public class Coche {
     private LocalDate fechaFabricacion;
     private Seguro seguro;
 
-    // Constructor sin parámetros  //todo : matricula 0000AAA 00001AAA 0000AAB
+    // Constructor sin parámetros
     public Coche() {
         this("BMW", "rojo", false, TipoCoche.UTILITARIO, LocalDate.now(), Seguro.TODORIESGO);
     }
@@ -40,13 +40,11 @@ public class Coche {
         this.fechaFabricacion = fechaFabricacion;
         this.seguro = seguro;
         this.matricula = nextMatricula();
-
-
     }
 
     public String nextMatricula() {
         if (cont >= 99999999) {
-            cont = 0; //
+            cont = 0; // Reiniciar contador si se alcanza el límite
         }
         int numero = cont % 10000;
         int letra = cont / 10000;
@@ -56,20 +54,23 @@ public class Coche {
         return numeroStr + letraStr;
     }
 
-
     private String valorALetra(int valor) {
         StringBuilder sb = new StringBuilder();
-        while (valor > 0) {
+        // Generar las letras
+        for (int i = 0; i < 3; i++) {
             int resto = valor % 26;
-            sb.append((char)('A' + resto));
+            sb.insert(0, (char)('A' + resto));
             valor /= 26;
+            if (valor == 0) break;
         }
+        
+        // Rellenar con 'A' si es necesario
         while (sb.length() < 3) {
-            sb.append('A');
+            sb.insert(0, 'A');
         }
-        return sb.reverse().toString();
+        
+        return sb.toString();
     }
-
 
     // Getters y setters
     public String getModelo() {
@@ -88,7 +89,7 @@ public class Coche {
         this.color = color;
     }
 
-    public boolean isEsMetalizada() {
+    public boolean isMetalizada() {
         return esMetalizada;
     }
 
