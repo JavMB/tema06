@@ -2,29 +2,29 @@ package com.javier.clase;
 import java.time.LocalDate;
 
 public class Bicicleta {
-    private final int REF;
+    private final int REFERENCIA;
     private String marca;
     private String modelo;
     private float peso;
     private float ruedasSize;
-    private boolean hasMotor;
+    private boolean tieneMotor;
     private final LocalDate fechaFab;
     private float precio;
 
-    public Bicicleta(int REF, String marca, String modelo, float peso, float ruedasSize, boolean hasMotor, LocalDate fechaFab, float precio) {
-        this.REF = REF;
+    public Bicicleta(int REFERENCIA, String marca, String modelo, float peso, float ruedasSize, boolean tieneMotor, LocalDate fechaFab, float precio) {
+        this.REFERENCIA = REFERENCIA;
         this.marca = marca;
         this.modelo = modelo;
         this.peso = peso;
         this.ruedasSize = ruedasSize;
-        this.hasMotor = hasMotor;
+        this.tieneMotor = tieneMotor;
         this.fechaFab = fechaFab;
         this.precio = precio;
     }
 
 
-    public int getREF() {
-        return REF;
+    public int getReferencia() {
+        return REFERENCIA;
     }
 
     public String getMarca() {
@@ -59,12 +59,12 @@ public class Bicicleta {
         this.ruedasSize = ruedasSize;
     }
 
-    public boolean isHasMotor() {
-        return hasMotor;
+    public boolean tieneMotor() {
+        return tieneMotor;
     }
 
-    public void setHasMotor(boolean hasMotor) {
-        this.hasMotor = hasMotor;
+    public void setTieneMotor(boolean tieneMotor) {
+        this.tieneMotor = tieneMotor;
     }
 
     public LocalDate getFechaFab() {
@@ -83,16 +83,16 @@ public class Bicicleta {
     public String toString() {
         return String.format(
                 "----------------------------------------%n" +
-                        "REF:                  %s%n" +
-                        "Marca:                %s%n" +
-                        "Modelo:               %s%n" +
-                        "Peso:                 %.2f kg%n" +
-                        "Tamaño de Ruedas:     %f%n" +
-                        "Tiene Motor:          %b%n" +
-                        "Fecha de Fabricación: %s%n" +
-                        "Precio:               %.2f €%n" +
+                        "Referencia:           %-10d%n" +
+                        "Marca:                %-10s%n" +
+                        "Modelo:               %-10s%n" +
+                        "Peso:                 %-10.2f kg%n" +
+                        "Tamaño de Ruedas:     %-10.1f%n" +
+                        "Tiene Motor:          %-10b%n" +
+                        "Fecha de Fabricación: %-10s%n" +
+                        "Precio:               %-10.2f €%n" +
                         "----------------------------------------",
-                REF, marca, modelo, peso, ruedasSize, hasMotor, fechaFab, precio
+                REFERENCIA, marca, modelo, peso, ruedasSize, tieneMotor, fechaFab, precio
         );
     }
 }
