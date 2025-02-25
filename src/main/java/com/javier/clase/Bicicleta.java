@@ -1,6 +1,9 @@
 package com.javier.clase;
 import java.time.LocalDate;
 
+/**
+ * Representa una bicicleta con sus características básicas.
+ */
 public class Bicicleta {
     private final int REFERENCIA;
     private String marca;
@@ -11,10 +14,49 @@ public class Bicicleta {
     private final LocalDate fechaFab;
     private float precio;
 
-    public Bicicleta(int REFERENCIA, String marca, String modelo, float peso, float ruedasSize, boolean tieneMotor, LocalDate fechaFab, float precio) {
+    /**
+     * Constructor que inicializa una nueva bicicleta con todos sus atributos.
+     * 
+     * @param REFERENCIA    Número único de referencia
+     * @param marca        Marca de la bicicleta
+     * @param modelo       Modelo específico
+     * @param peso        Peso en kilogramos
+     * @param ruedasSize  Tamaño de las ruedas en pulgadas
+     * @param tieneMotor  Si tiene asistencia eléctrica
+     * @param fechaFab    Fecha de fabricación
+     * @param precio      Precio en euros
+     * @throws IllegalArgumentException si algún parámetro no es válido
+     */
+    public Bicicleta(int REFERENCIA, String marca, String modelo, float peso, 
+                     float ruedasSize, boolean tieneMotor, LocalDate fechaFab, float precio) {
+        if (REFERENCIA <= 0) {
+            throw new IllegalArgumentException("La referencia debe ser positiva");
+        }
+        if (marca == null || marca.trim().isEmpty()) {
+            throw new IllegalArgumentException("La marca no puede estar vacía");
+        }
+        if (modelo == null || modelo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El modelo no puede estar vacío");
+        }
+        if (peso <= 0) {
+            throw new IllegalArgumentException("El peso debe ser positivo");
+        }
+        if (ruedasSize <= 0) {
+            throw new IllegalArgumentException("El tamaño de ruedas debe ser positivo");
+        }
+        if (fechaFab == null) {
+            throw new IllegalArgumentException("La fecha de fabricación no puede ser nula");
+        }
+        if (fechaFab.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("La fecha de fabricación no puede ser futura");
+        }
+        if (precio < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
+
         this.REFERENCIA = REFERENCIA;
-        this.marca = marca;
-        this.modelo = modelo;
+        this.marca = marca.trim();
+        this.modelo = modelo.trim();
         this.peso = peso;
         this.ruedasSize = ruedasSize;
         this.tieneMotor = tieneMotor;
@@ -83,14 +125,14 @@ public class Bicicleta {
     public String toString() {
         return String.format(
                 "----------------------------------------%n" +
-                        "Referencia:           %-10d%n" +
-                        "Marca:                %-10s%n" +
-                        "Modelo:               %-10s%n" +
-                        "Peso:                 %-10.2f kg%n" +
-                        "Tamaño de Ruedas:     %-10.1f%n" +
-                        "Tiene Motor:          %-10b%n" +
-                        "Fecha de Fabricación: %-10s%n" +
-                        "Precio:               %-10.2f €%n" +
+                        "Referencia:           %-15d%n" +
+                        "Marca:                %-15s%n" +
+                        "Modelo:               %-15s%n" +
+                        "Peso:                 %-15.2f kg%n" +
+                        "Tamaño de Ruedas:     %-15.1f%n" +
+                        "Tiene Motor:          %-15b%n" +
+                        "Fecha de Fabricación: %-15s%n" +
+                        "Precio:               %-15.2f €%n" +
                         "----------------------------------------",
                 REFERENCIA, marca, modelo, peso, ruedasSize, tieneMotor, fechaFab, precio
         );
