@@ -1,4 +1,5 @@
 package com.javier.clase;
+
 import java.time.LocalDate;
 
 public class Coche {
@@ -16,6 +17,7 @@ public class Coche {
     }
 
     // Atributos
+    private static int cont=0;
     private String modelo;
     private String color;
     private boolean esMetalizada;
@@ -24,21 +26,50 @@ public class Coche {
     private LocalDate fechaFabricacion;
     private Seguro seguro;
 
-    // Constructor sin parámetros
+    // Constructor sin parámetros  //todo : matricula 0000AAA 00001AAA 0000AAB
     public Coche() {
-        this("BMW", "rojo", false, "0000", TipoCoche.UTILITARIO, LocalDate.now(), Seguro.TODORIESGO);
+        this("BMW", "rojo", false, TipoCoche.UTILITARIO, LocalDate.now(), Seguro.TODORIESGO);
     }
 
     // Constructor con parámetros
-    public Coche(String modelo, String color, boolean esMetalizada, String matricula, TipoCoche tipo, LocalDate fechaFabricacion, Seguro seguro) {
+    public Coche(String modelo, String color, boolean esMetalizada, TipoCoche tipo, LocalDate fechaFabricacion, Seguro seguro) {
         this.modelo = modelo;
         this.color = color;
         this.esMetalizada = esMetalizada;
-        this.matricula = matricula;
         this.tipo = tipo;
         this.fechaFabricacion = fechaFabricacion;
         this.seguro = seguro;
+        this.matricula = nextMatricula();
+
+
     }
+
+    public String nextMatricula() {
+        if (cont >= 99999999) {
+            cont = 0; //
+        }
+        int numero = cont % 10000;
+        int letra = cont / 10000;
+        String numeroStr = String.format("%04d", numero);
+        String letraStr = valorALetra(letra);
+        cont++;
+        return numeroStr + letraStr;
+    }
+
+
+    private String valorALetra(int valor) {
+        StringBuilder sb = new StringBuilder();
+        while (valor > 0) {
+            int resto = valor % 26;
+            sb.append((char)('A' + resto));
+            valor /= 26;
+        }
+        while (sb.length() < 3) {
+            sb.append('A');
+        }
+        return sb.reverse().toString();
+    }
+
 
     // Getters y setters
     public String getModelo() {
