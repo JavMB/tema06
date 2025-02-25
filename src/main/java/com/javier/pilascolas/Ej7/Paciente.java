@@ -1,16 +1,16 @@
 package com.javier.pilascolas.Ej7;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Paciente {
-    public Random rnd=new Random();
-    private String nombre;
-    private String SIP;
+    private final String nombre;
+    private final String SIP;
     private LocalDateTime llegada;
 
     public Paciente(String nombre, LocalDateTime llegada) {
         this.nombre = nombre;
-        this.SIP = generarSip(rnd);
+        this.SIP = generarSip(Medico.rnd);
         this.llegada = llegada;
     }
 
@@ -34,6 +34,7 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return nombre;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return String.format("%-10s %-12s %s", nombre, SIP, llegada.format(formato));
     }
 }

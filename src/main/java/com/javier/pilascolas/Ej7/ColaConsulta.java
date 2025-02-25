@@ -1,24 +1,23 @@
 package com.javier.pilascolas.Ej7;
 
+import com.javier.pilascolas.Cola;
+
 import java.time.LocalDateTime;
-import java.util.Deque;
-import java.util.ArrayDeque;
 import java.util.Scanner;
 
 public class ColaConsulta {
     private Medico medico;
-    private Deque<Paciente> cola; //
+    private Cola<Paciente> cola; //
 
     public ColaConsulta(Medico medico) {
         this.medico = medico;
-        this.cola = new ArrayDeque<>();
+        this.cola = new Cola<>();
     }
-
     // añadir un paciente
     public void agregarPaciente(Paciente paciente) {
-        cola.addLast(paciente);
+        cola.enqueue(paciente);
+        System.out.println("Paciente agregado correctamente");
     }
-
     public void llegadaPaciente(Scanner sc) {
         LocalDateTime llegada = LocalDateTime.now();
         System.out.println("Dime tu nombre");
@@ -26,22 +25,19 @@ public class ColaConsulta {
 
         Paciente p1 = new Paciente(nombre, llegada);
         agregarPaciente(p1);
-
-
     }
-
+    public void llegadaPaciente(String nombre) {
+        LocalDateTime llegada = LocalDateTime.now();
+        Paciente p1 = new Paciente(nombre, llegada);
+        agregarPaciente(p1);
+    }
     // atender al siguiente paciente
     public Paciente atenderPaciente() {
-        return cola.pollFirst();
+        return cola.dequeue();
     }
-
-
     @Override
     public String toString() {
-        return "Consulta{" +
-                "medico=" + medico +
-                ", pacientes=" + cola.toString() +
-                '}';
+        return "Medico: "+medico+
+                " "+cola;
     }
-
 }

@@ -53,7 +53,7 @@ public class CodeParser {
             if (valor == 1 || valor == 3 || valor == 4) {
                 p1.push(valor);
             } else if (valor == 2 || valor == 6 || valor == 8) {
-                if (p1.isEmpty() || p1.top() != valor / 2) {
+                if (p1.isEmpty() || ((Number) p1.top()).doubleValue() > valor / 2.0) {
                     System.out.println("Error: Cierre inesperado '" + caracter + "'");
                     return;
                 }

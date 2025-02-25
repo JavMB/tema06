@@ -1,13 +1,11 @@
 package com.javier.pilascolas.Ej7;
-
-
 import java.util.Random;
 
 public class Medico {
-    private static final Random rnd=new Random();
+    public static final Random rnd=new Random();
 
     private static final int maxNumsCol=6;
-    private String nombre;
+    private final String nombre;
     private String numeroColegiado;
 
     public Medico(String nombre) {

@@ -2,27 +2,14 @@ package com.javier.pilascolas;
 
 import java.util.Arrays;
 
-/**
- * DynamicArray
- * License: 🅮 Public Domain
- * Ejercicios de Pilas y Colas
- *
- * @author Germán Gascón <ggascon@gmail.com>
- * @version 0.1, 2020-01-30
- * @since 0.1, 2020-01-30
- **/
-public class DynamicArray {
-    /*
-      Como aún no hemos visto las Exception de momento utilizamos el menos infinito para detectar errores
-    */
-    private static final double ERROR = Double.NEGATIVE_INFINITY;
+public class DynamicArray<T> {
     /* Capacidad inicial por defecto del array */
-    private final static int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 10;
     /* Factor de crecimiento */
-    private final static float GROW_FACTOR = 2f;
-    /* Los datos del array */
-    private double[] data;
-    /* Número de elementos del array */
+    private static final float GROW_FACTOR = 2f;
+    /* Array de datos */
+    private T[] data;
+    /* Número de elementos en el array */
     private int size;
 
     /**
@@ -37,42 +24,40 @@ public class DynamicArray {
      *
      * @param capacity Capacidad inicial
      */
+    @SuppressWarnings("unchecked")
     public DynamicArray(int capacity) {
-        data = new double[capacity];
+        data = (T[]) new Object[capacity]; // Array genérico
         size = 0;
     }
 
     /**
-     * Obtiene el elemento que ocupa el índice index
+     * Obtiene el elemento en la posición index
      *
      * @param index Índice del elemento a obtener
-     * @return el valor obtenido o ERROR
+     * @return el valor obtenido o null si el índice es inválido
      */
-    public double get(int index) {
+    public T get(int index) {
         if (index >= size || index < 0)
-            return ERROR;
+            return null;
         return data[index];
     }
 
     /**
-     * Añade el elemento indicado al array
+     * Añade un elemento al final del array
      *
      * @param value Elemento a añadir
-     * @return true
+     * @return true si se añadió correctamente
      */
-    public boolean add(double value) {
-        if (isFull())
-            expand();
-        data[size] = value;
-        size++;
+    public boolean add(T value) {
+        if (isFull()) expand();
+        data[size++] = value;
         return true;
     }
 
-
     /**
-     * Método de uso interno para desplazar los elementos a la derecha a partir del índice indicado
+     * Desplaza los elementos a la derecha a partir del índice indicado
      *
-     * @param index Índice a partir del cual se desplazarán los elementos
+     * @param index Índice desde donde se desplazan los elementos
      */
     private void moveToRight(int index) {
         for (int i = size; i > index; i--) {
@@ -81,61 +66,58 @@ public class DynamicArray {
         size++;
     }
 
-
     /**
-     * Añade el elemento indicado al array en la posición indicada por index
+     * Añade un elemento en una posición específica
      *
-     * @param index Índice donde se añadirá el elemento
+     * @param index Índice donde se insertará el elemento
      * @param value Elemento a añadir
-     * @return true
+     * @return true si se insertó correctamente
      */
-    public boolean add(int index, double value) {
-        if (index >= size || index < 0)
+    public boolean add(int index, T value) {
+        if (index > size || index < 0)
             return false;
-        if (isFull())
-            expand();
+        if (isFull()) expand();
         moveToRight(index);
         data[index] = value;
         return true;
     }
 
     /**
-     * Método de uso interno para desplazar los elementos a la izquierda a partir del índice indicado
+     * Desplaza los elementos a la izquierda desde el índice indicado
      *
-     * @param index Índice a partir del cual se desplazarán los elementos
+     * @param index Índice desde donde se desplazan los elementos
      */
     private void moveToLeft(int index) {
         for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
         }
         size--;
+        data[size] = null; // Limpiar referencia para evitar memory leaks
     }
 
     /**
-     * Elimina del array el elemento que ocupa la posición desplazando una posición a la izquierda
-     * todos los elementos que hay a su derecha
+     * Elimina el elemento en una posición dada
      *
-     * @param index posición a eliminar
-     * @return El valor eliminado
+     * @param index Índice del elemento a eliminar
+     * @return El valor eliminado o null si el índice es inválido
      */
-    public double remove(int index) {
+    public T remove(int index) {
         if (index >= size || index < 0)
-            return ERROR;
-        double valor = data[index];
+            return null;
+        T removedValue = data[index];
         moveToLeft(index);
-        return valor;
+        return removedValue;
     }
 
     /**
-     * Elimina del array la primera ocurrencia del valor indicado como parámetro desplazando una posición
-     * a la izquierda todos los elementos que haya a su derecha
+     * Elimina la primera ocurrencia de un valor
      *
-     * @param value valor a eliminar
-     * @return true si se ha borrado el elemento, false en caso contrario
+     * @param value Valor a eliminar
+     * @return true si se eliminó con éxito, false si no se encontró
      */
-    public boolean remove(double value) {
+    public boolean remove(T value) {
         for (int i = 0; i < size; i++) {
-            if (data[i] == value) {
+            if (data[i].equals(value)) {
                 moveToLeft(i);
                 return true;
             }
@@ -144,13 +126,13 @@ public class DynamicArray {
     }
 
     /**
-     * Establece el valor del elemento con índice index
+     * Establece un nuevo valor en una posición dada
      *
      * @param index Índice del elemento a modificar
-     * @param value Valor que toma el elemento
-     * @return true
+     * @param value Nuevo valor
+     * @return true si la operación fue exitosa, false si el índice es inválido
      */
-    public boolean set(int index, double value) {
+    public boolean set(int index, T value) {
         if (index >= size || index < 0)
             return false;
         data[index] = value;
@@ -158,46 +140,89 @@ public class DynamicArray {
     }
 
     /**
-     * Método de uso interno para ampliar la capacidad del array según el factor de crecimiento
+     * Expande el tamaño del array según el factor de crecimiento
      */
+    @SuppressWarnings("unchecked")
     private void expand() {
-        double[] copy = new double[Math.round(data.length * GROW_FACTOR)];
-        for (int i = 0; i < size; i++) {
-            copy[i] = data[i];
-        }
-        data = copy;
+        int newSize = Math.round(data.length * GROW_FACTOR);
+        data = Arrays.copyOf(data, newSize);
     }
 
     /**
-     * Obtiene el número de elementos que hay en el array
+     * Obtiene el número de elementos almacenados
      *
-     * @return int
+     * @return Tamaño actual
      */
     public int size() {
         return size;
     }
 
     /**
-     * Método de uso interno para determinar si el array está lleno
+     * Verifica si el array está lleno
      *
-     * @return true si está lleno, false si no lo está
+     * @return true si está lleno, false si no
      */
     private boolean isFull() {
         return size == data.length;
     }
+
+
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            data[i] = null;
+
+        }
+        size = 0;
+
+    }
+
+    public DynamicArray<T> clone() {
+        DynamicArray<T> nuevoarray = new DynamicArray<>(this.data.length);
+        nuevoarray.size = this.size;
+        nuevoarray.data = Arrays.copyOf(this.data, this.data.length);
+        return nuevoarray;
+    }
+
+    public int indexOf(T e) {
+        for (int i = 0; i < size; i++) {
+            if (e == null) {
+                if (data[i] == null) return i;
+            } else {
+                if (e.equals(data[i])) return i;
+            }
+        }
+        return -1;
+    }
+
+
+    public void trimToSize() {
+        if (size < data.length) {
+            data = Arrays.copyOf(data, size);
+        }
+    }
+
+    public boolean swap(int ix1, int ix2) {
+        if (ix1 >= 0 && ix1 < size && ix2 >= 0 && ix2 < size) {
+            T aux = data[ix1];
+            data[ix1] = data[ix2];
+            data[ix2] = aux;
+            return true;
+        }
+        return false;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DynamicArray that = (DynamicArray) o;
+        DynamicArray<?> that = (DynamicArray<?>) o;
 
         if (size != that.size) return false;
-
-        // Sólo tenemos en cuenta los elementos del array que están en posiciones válidas
         for (int i = 0; i < size; i++) {
-            if (data[i] != that.data[i])
+            if (!data[i].equals(that.data[i]))
                 return false;
         }
         return true;
@@ -205,15 +230,12 @@ public class DynamicArray {
 
     @Override
     public int hashCode() {
-        int result = Arrays.hashCode(data);
-        result = 31 * result + size;
-        return result;
+        return 31 * Arrays.hashCode(data) + size;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[ ");
+        StringBuilder sb = new StringBuilder("[ ");
         for (int i = 0; i < size; i++)
             sb.append(data[i]).append(" ");
         sb.append("]");
@@ -221,22 +243,26 @@ public class DynamicArray {
     }
 
     public static void main(String[] args) {
-        DynamicArray d1 = new DynamicArray(10);
-        for (int i = 0; i < 9; i++) {
-            d1.add(i + 100);
-        }
+        DynamicArray<String> d1 = new DynamicArray<>(10);
+
+        d1.add("Hola");
+        d1.add("Mundo");
+        d1.add("!");
+
         System.out.println(d1);
-        d1.add(9, 100);
 
-        d1.add(200);
+        d1.add(1, "Nuevo");
+        System.out.println(d1);
 
-        d1.remove(8);
-        d1.remove(100.00);
+        d1.remove(2);
+        System.out.println(d1);
 
-        System.out.println(d1.get(9));
-        System.out.println(d1.set(9, 500));
-        System.out.println(d1.size);
+        d1.remove("Nuevo");
+        System.out.println(d1);
 
+        System.out.println("Elemento en índice 1: " + d1.get(1));
 
+        d1.set(1, "Adiós");
+        System.out.println(d1);
     }
 }

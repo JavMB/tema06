@@ -4,8 +4,12 @@ import java.util.Scanner;
 public class Hospital {
     private ColaConsulta[] consultas;
 
-    public Hospital(int cantidad) {
-        this.consultas = new ColaConsulta[cantidad];
+    public Hospital() {
+        String[] nombres = {"Juan", "Javi", "Pablo", "Pepe", "Ernesto"};
+        this.consultas = new ColaConsulta[nombres.length];
+        for (int i = 0; i < nombres.length; i++) {
+            this.consultas[i] = new ColaConsulta(new Medico(nombres[i]));
+        }
     }
 
     public void setConsultas(ColaConsulta[] consultas) {
@@ -18,78 +22,68 @@ public class Hospital {
                 "2. Atender siguiente paciente\n" +
                 "3. Mostrar estado de las colas\n" +
                 "4. Salir");
-        return sc.nextInt();
+        return Integer.parseInt(sc.nextLine());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Hospital{\n");
-
+        sb.append("Consultas{\n");
         int contador = 1;
         for (ColaConsulta consulta : consultas) {
-            sb.append("  ").append(contador).append(". ").append(consulta.toString()).append("\n");
+            sb.append("  ").append(contador).append(". ").append(consulta).append("\n");
             contador++;
         }
-
         sb.append("}");
         return sb.toString();
     }
 
-    public void añadirPaciente(Scanner sc) {
+    public void addPaciente(Scanner sc) {
         System.out.println(this);
-        int opcion = sc.nextInt();
+        System.out.println("A que cola añadimos paciente");
+        int opcion = Integer.parseInt(sc.nextLine());
+        opcion--;
         consultas[opcion].llegadaPaciente(sc);
-        System.out.println(consultas[opcion]);
+
     }
 
     public void atenderPaciente(Scanner sc) {
         System.out.println(this);
-        int opcion = sc.nextInt();
+        int opcion = Integer.parseInt(sc.nextLine());
+        opcion--;
         System.out.println(consultas[opcion].atenderPaciente());
         System.out.println(consultas[opcion]);
     }
+    public void llenarConsultasInicialmente(Scanner sc) {
+        String[] nombres = {"Pedro", "Sanchez", "Pablo", "Iglesias", "Juan"};
+        for (ColaConsulta consulta : consultas) {
+            for (int i = 0; i < 5; i++) {
+                consulta.llegadaPaciente(nombres[i]);
+            }
+        }
+        System.out.println("Pacientes iniciales agregados correctamente.\n");
+    }
+
 
 
     public static void main(String[] args) {
-        Hospital h1 = new Hospital(5);
         Scanner sc = new Scanner(System.in);
-        ColaConsulta[] cola = getColaConsultas();
-        for (ColaConsulta consulta : cola) {
-            for (int i = 0; i < 5; i++) {
-                consulta.llegadaPaciente(sc);
-            }
-        }
-        h1.setConsultas(cola);
+        Hospital h1 = new Hospital();
 
+        h1.llenarConsultasInicialmente(sc);
         System.out.println(h1);
 
+        int op;
+        boolean salir = false;
         do {
-            switch (h1.menuHospital(sc)) {
-                case 1 -> h1.añadirPaciente(sc);
+            op = h1.menuHospital(sc);
+            switch (op) {
+                case 1 -> h1.addPaciente(sc);
                 case 2 -> h1.atenderPaciente(sc);
                 case 3 -> System.out.println(h1);
-                case 4 -> {
-                    return;
-                }
-                default -> System.out.println("Elige bien");
+                case 4 -> salir = true;
+                default -> System.out.println("Elige una opción válida.");
             }
-        } while (true);
-
-
+        } while (!salir);
     }
-
-
-    private static ColaConsulta[] getColaConsultas() {
-        String[] nombres = {"Juan", "Javi", "Pablo", "Pepe", "Ernesto"};
-        ColaConsulta[] consultas = new ColaConsulta[nombres.length];
-
-        for (int i = 0; i < nombres.length; i++) {
-            consultas[i] = new ColaConsulta(new Medico(nombres[i]));
-        }
-        return consultas;
-    }
-
-
-
 }
