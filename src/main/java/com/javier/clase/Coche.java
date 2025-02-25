@@ -1,10 +1,13 @@
 package com.javier.clase;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Getter
+@Setter
 public class Coche {
 
-    // Enums
     public enum TipoCoche {
         MINI,
         UTILITARIO,
@@ -16,7 +19,7 @@ public class Coche {
         TERCEROS, TODORIESGO
     }
 
-    // Atributos
+
     private static int cont = 0;
     private String modelo;
     private String color;
@@ -26,12 +29,12 @@ public class Coche {
     private LocalDate fechaFabricacion;
     private Seguro seguro;
 
-    // Constructor sin parámetros
+
     public Coche() {
         this("BMW", "rojo", false, TipoCoche.UTILITARIO, LocalDate.now(), Seguro.TODORIESGO);
     }
 
-    // Constructor con parámetros
+
     public Coche(String modelo, String color, boolean esMetalizada, TipoCoche tipo, LocalDate fechaFabricacion, Seguro seguro) {
         this.modelo = modelo;
         this.color = color;
@@ -72,74 +75,21 @@ public class Coche {
         return sb.toString();
     }
 
-    // Getters y setters
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public boolean isMetalizada() {
-        return esMetalizada;
-    }
-
-    public void setEsMetalizada(boolean esMetalizada) {
-        this.esMetalizada = esMetalizada;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public TipoCoche getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoCoche tipo) {
-        this.tipo = tipo;
-    }
-
-    public LocalDate getFechaFabricacion() {
-        return fechaFabricacion;
-    }
-
-    public void setFechaFabricacion(LocalDate fechaFabricacion) {
-        this.fechaFabricacion = fechaFabricacion;
-    }
-
-    public Seguro getSeguro() {
-        return seguro;
-    }
-
-    public void setSeguro(Seguro seguro) {
-        this.seguro = seguro;
-    }
-
-    // Método toString
     @Override
     public String toString() {
         return "Coche{" +
-                "modelo='" + modelo + '\'' +
-                ", color='" + color + '\'' +
-                ", esMetalizada=" + esMetalizada +
-                ", matricula='" + matricula + '\'' +
-                ", tipo=" + tipo +
+                "seguro=" + seguro +
                 ", fechaFabricacion=" + fechaFabricacion +
-                ", seguro=" + seguro +
+                ", tipo=" + tipo +
+                ", matricula='" + matricula + '\'' +
+                ", esMetalizada=" + esMetalizada +
+                ", color='" + color + '\'' +
+                ", modelo='" + modelo + '\'' +
                 '}';
+    }
+
+    public static void main(String[] args) {
+        Coche c1=new Coche();
+        System.out.println(c1.getColor());
     }
 }

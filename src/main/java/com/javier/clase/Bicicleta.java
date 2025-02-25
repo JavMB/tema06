@@ -1,72 +1,30 @@
 package com.javier.clase;
 import java.time.LocalDate;
 
-/**
- * Representa una bicicleta con sus características básicas.
- */
 public class Bicicleta {
-    private final int REFERENCIA;
+    private final int REF;
     private String marca;
     private String modelo;
     private float peso;
     private float ruedasSize;
-    private boolean tieneMotor;
+    private boolean hasMotor;
     private final LocalDate fechaFab;
     private float precio;
 
-    /**
-     * Constructor que inicializa una nueva bicicleta con todos sus atributos.
-     * 
-     * @param REFERENCIA    Número único de referencia
-     * @param marca        Marca de la bicicleta
-     * @param modelo       Modelo específico
-     * @param peso        Peso en kilogramos
-     * @param ruedasSize  Tamaño de las ruedas en pulgadas
-     * @param tieneMotor  Si tiene asistencia eléctrica
-     * @param fechaFab    Fecha de fabricación
-     * @param precio      Precio en euros
-     * @throws IllegalArgumentException si algún parámetro no es válido
-     */
-    public Bicicleta(int REFERENCIA, String marca, String modelo, float peso, 
-                     float ruedasSize, boolean tieneMotor, LocalDate fechaFab, float precio) {
-        if (REFERENCIA <= 0) {
-            throw new IllegalArgumentException("La referencia debe ser positiva");
-        }
-        if (marca == null || marca.trim().isEmpty()) {
-            throw new IllegalArgumentException("La marca no puede estar vacía");
-        }
-        if (modelo == null || modelo.trim().isEmpty()) {
-            throw new IllegalArgumentException("El modelo no puede estar vacío");
-        }
-        if (peso <= 0) {
-            throw new IllegalArgumentException("El peso debe ser positivo");
-        }
-        if (ruedasSize <= 0) {
-            throw new IllegalArgumentException("El tamaño de ruedas debe ser positivo");
-        }
-        if (fechaFab == null) {
-            throw new IllegalArgumentException("La fecha de fabricación no puede ser nula");
-        }
-        if (fechaFab.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("La fecha de fabricación no puede ser futura");
-        }
-        if (precio < 0) {
-            throw new IllegalArgumentException("El precio no puede ser negativo");
-        }
-
-        this.REFERENCIA = REFERENCIA;
-        this.marca = marca.trim();
-        this.modelo = modelo.trim();
+    public Bicicleta(int REF, String marca, String modelo, float peso, float ruedasSize, boolean hasMotor, LocalDate fechaFab, float precio) {
+        this.REF = REF;
+        this.marca = marca;
+        this.modelo = modelo;
         this.peso = peso;
         this.ruedasSize = ruedasSize;
-        this.tieneMotor = tieneMotor;
+        this.hasMotor = hasMotor;
         this.fechaFab = fechaFab;
         this.precio = precio;
     }
 
 
-    public int getReferencia() {
-        return REFERENCIA;
+    public int getREF() {
+        return REF;
     }
 
     public String getMarca() {
@@ -101,12 +59,12 @@ public class Bicicleta {
         this.ruedasSize = ruedasSize;
     }
 
-    public boolean tieneMotor() {
-        return tieneMotor;
+    public boolean isHasMotor() {
+        return hasMotor;
     }
 
-    public void setTieneMotor(boolean tieneMotor) {
-        this.tieneMotor = tieneMotor;
+    public void setHasMotor(boolean hasMotor) {
+        this.hasMotor = hasMotor;
     }
 
     public LocalDate getFechaFab() {
@@ -125,16 +83,16 @@ public class Bicicleta {
     public String toString() {
         return String.format(
                 "----------------------------------------%n" +
-                        "Referencia:           %-15d%n" +
-                        "Marca:                %-15s%n" +
-                        "Modelo:               %-15s%n" +
-                        "Peso:                 %-15.2f kg%n" +
-                        "Tamaño de Ruedas:     %-15.1f%n" +
-                        "Tiene Motor:          %-15b%n" +
-                        "Fecha de Fabricación: %-15s%n" +
-                        "Precio:               %-15.2f €%n" +
+                        "REF:                  %s%n" +
+                        "Marca:                %s%n" +
+                        "Modelo:               %s%n" +
+                        "Peso:                 %.2f kg%n" +
+                        "Tamaño de Ruedas:     %f%n" +
+                        "Tiene Motor:          %b%n" +
+                        "Fecha de Fabricación: %s%n" +
+                        "Precio:               %.2f €%n" +
                         "----------------------------------------",
-                REFERENCIA, marca, modelo, peso, ruedasSize, tieneMotor, fechaFab, precio
+                REF, marca, modelo, peso, ruedasSize, hasMotor, fechaFab, precio
         );
     }
 }
