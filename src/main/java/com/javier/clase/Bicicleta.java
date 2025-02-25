@@ -81,15 +81,18 @@ public class Bicicleta {
 
     @Override
     public String toString() {
-        return "Bicicleta{" +
-                "REF=" + REF +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", peso=" + peso +
-                ", ruedasSize=" + ruedasSize +
-                ", hasMotor=" + hasMotor +
-                ", fechaFab=" + fechaFab +
-                ", precio=" + precio +
-                '}';
+        return String.format(
+                "----------------------------------------%n" +
+                        "REF:                  %s%n" +
+                        "Marca:                %s%n" +
+                        "Modelo:               %s%n" +
+                        "Peso:                 %.2f kg%n" +
+                        "Tamaño de Ruedas:     %f%n" +
+                        "Tiene Motor:          %b%n" +
+                        "Fecha de Fabricación: %s%n" +
+                        "Precio:               %.2f €%n" +
+                        "----------------------------------------",
+                REF, marca, modelo, peso, ruedasSize, hasMotor, fechaFab, precio
+        );
     }
 }
