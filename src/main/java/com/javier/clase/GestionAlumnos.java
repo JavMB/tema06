@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class GestionAlumnos {
 
-    private Alumno[] alumnos; // Array de alumnos
+    private final Alumno[] alumnos;
 
     public GestionAlumnos(int capacidadMaxima) {
         alumnos = new Alumno[capacidadMaxima];
@@ -21,18 +21,14 @@ public class GestionAlumnos {
         }
 
         for (int i = 0; i < cantidad; i++) {
-
-            alumnos[i] = new Alumno();
-
-
-            alumnos[i].setNia(Integer.toString(rnd.nextInt(1035623)));
-            alumnos[i].setNombre(nombres[rnd.nextInt(nombres.length)]);
-            alumnos[i].setApellido(apellidos[rnd.nextInt(apellidos.length)]);
-            alumnos[i].setFechanacimiento(LocalDate.ofEpochDay(new Random().nextInt((int) ChronoUnit.DAYS.between(LocalDate.of(1990, 1, 1), LocalDate.of(2010, 12, 31))) + LocalDate.of(1990, 1, 1).toEpochDay()));
-            alumnos[i].setGrupo(rnd.nextInt(2) + 1);
-
+            String nia = (Integer.toString(rnd.nextInt(1035623)));
+            String nombre = (nombres[rnd.nextInt(nombres.length)]);
+            String apellido = (apellidos[rnd.nextInt(apellidos.length)]);
+            LocalDate fecha = (LocalDate.ofEpochDay(new Random().nextInt((int) ChronoUnit.DAYS.between(LocalDate.of(1990, 1, 1), LocalDate.of(2010, 12, 31))) + LocalDate.of(1990, 1, 1).toEpochDay()));
+            int grupo = (rnd.nextInt(2) + 1);
             long telefono = 100000000 + (long) (rnd.nextDouble() * (965174521 - 100000000));
-            alumnos[i].setTelefono(Long.toString(telefono));
+
+            alumnos[i] = new Alumno(nia, nombre, apellido, fecha, grupo, telefono);
         }
     }
 
@@ -68,13 +64,11 @@ public class GestionAlumnos {
     public void nuevoAlumno(Scanner scanner) {
 
 
-        // Solicitar datos del nuevo alumno
         System.out.println("** NUEVO ALUMNO **");
         System.out.print("Introduce NIA: ");
         String nia = scanner.nextLine().toUpperCase();
 
 
-        // Validar que no exista otro alumno con el mismo NIA
         for (Alumno alumno : alumnos) {
             if (alumno != null) {
                 if (alumno.getNia().equals(nia)) {
@@ -94,7 +88,7 @@ public class GestionAlumnos {
         System.out.print("Introduce grupo: ");
         int grupo = Integer.parseInt(scanner.nextLine());
         System.out.print("Introduce teléfono: ");
-        String telefono = scanner.nextLine();
+        long telefono = Long.parseLong(scanner.nextLine());
 
         // Crear el nuevo alumno y agregarlo al array
         Alumno nuevoAlumno = new Alumno(nia, nombre, apellidos, fechaNacimiento, grupo, telefono);
@@ -132,8 +126,8 @@ public class GestionAlumnos {
     public void porGrupo(Scanner sc) {
         System.out.println("Dime el grupo");
         int grupo = sc.nextInt();
-        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n","NIA","Nombre","Apellido","Fecha",
-                "Grupo","Telefono");
+        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n", "NIA", "Nombre", "Apellido", "Fecha",
+                "Grupo", "Telefono");
         for (Alumno alumno : alumnos) {
             if (alumno != null && alumno.getGrupo() == grupo) {
                 System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n",
@@ -151,8 +145,8 @@ public class GestionAlumnos {
     public void porNia(Scanner sc) {
         System.out.println("Dime el NIA");
         String nia = sc.nextLine();
-        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n","NIA","Nombre","Apellido","Fecha",
-                "Grupo","Telefono");
+        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n", "NIA", "Nombre", "Apellido", "Fecha",
+                "Grupo", "Telefono");
         for (Alumno alumno : alumnos) {
             if (alumno != null && alumno.getNia().equals(nia)) {
                 System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n",
@@ -170,8 +164,8 @@ public class GestionAlumnos {
     public void porApellido(Scanner sc) {
         System.out.println("Dime el apellido");
         String apellido = sc.nextLine();
-        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n","NIA","Nombre","Apellido","Fecha",
-                "Grupo","Telefono");
+        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n", "NIA", "Nombre", "Apellido", "Fecha",
+                "Grupo", "Telefono");
         for (Alumno alumno : alumnos) {
             if (alumno != null && alumno.getApellido().equals(apellido)) {
                 System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n",
@@ -189,8 +183,8 @@ public class GestionAlumnos {
     public void porEdad(Scanner sc) {
         System.out.println("Dime la edad");
         LocalDate edad = LocalDate.parse(sc.nextLine());
-        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n","NIA","Nombre","Apellido","Fecha",
-                "Grupo","Telefono");
+        System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n", "NIA", "Nombre", "Apellido", "Fecha",
+                "Grupo", "Telefono");
         for (Alumno alumno : alumnos) {
             if (alumno != null && alumno.getFechanacimiento().isEqual(edad)) {
                 System.out.printf("%-10s %-10s %-15s %-15s %-10s %-10s\n",
@@ -206,51 +200,4 @@ public class GestionAlumnos {
     }
 
 
-    public Alumno[] getAlumnos() {
-        return alumnos;
-    }
-
-    public void setAlumnos(Alumno[] alumnos) {
-        this.alumnos = alumnos;
-    }
-
-    public static void main(String[] args) {
-        String[] nombres = {"javi", "pepe", "juan", "jose"};
-        String[] apellidos = {"mengual", "lopez", "ferrandiz", "torrado"};
-
-        GestionAlumnos alumnos1 = new GestionAlumnos(20);
-
-        alumnos1.generarAlumnos(20, new Random(), nombres, apellidos);
-
-
-        int opcion, opcion2;
-
-        do {
-
-            opcion = menuAlumnos();
-
-            switch (opcion) {
-                case 1 -> alumnos1.nuevoAlumno(new Scanner(System.in));
-                case 2 -> alumnos1.borrarAlumno(new Scanner(System.in));
-                case 3 -> {
-                    do {
-                        opcion2 = menuConsultas();
-
-                        switch (opcion2) {
-                            case 1 -> alumnos1.porGrupo(new Scanner(System.in));
-                            case 2 -> alumnos1.porEdad(new Scanner(System.in));
-                            case 3 -> alumnos1.porNia(new Scanner(System.in));
-                            case 4 -> alumnos1.porApellido(new Scanner(System.in));
-
-                        }
-                    } while (opcion2 != 0);
-                }
-
-            }
-
-
-        } while (opcion != 0);
-
-
-    }
 }

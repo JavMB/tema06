@@ -1,7 +1,7 @@
 package com.javier.clase;
 
 public class ItemBicicleta {
-    private Bicicleta bicicleta;
+    private final Bicicleta bicicleta;
     private int stock;
 
     public ItemBicicleta(Bicicleta bicicleta, int stock) {

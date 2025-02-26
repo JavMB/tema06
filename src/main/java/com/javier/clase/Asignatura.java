@@ -1,5 +1,7 @@
 package com.javier.clase;
 
+import java.util.Objects;
+
 public class  Asignatura {
     private String nombre;
     private String codigo;
@@ -37,13 +39,15 @@ public class  Asignatura {
         this.curso = curso;
     }
 
-    public static void main(String[] args) {
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Asignatura that = (Asignatura) o;
+        return curso == that.curso && Objects.equals(nombre, that.nombre) && Objects.equals(codigo, that.codigo);
+    }
 
-        Asignatura programacion = new Asignatura("Programación", "1017", 1);
-
-
-        System.out.println("Nombre de la asignatura: " + programacion.getNombre());
-        System.out.println("Código de la asignatura: " + programacion.getCodigo());
-        System.out.println("Curso de la asignatura: " + programacion.getCurso());
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, codigo, curso);
     }
 }

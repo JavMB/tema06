@@ -3,13 +3,13 @@ import java.time.LocalDate;
 
 public class Bicicleta {
     private final int REF;
-    private String marca;
-    private String modelo;
-    private float peso;
-    private float ruedasSize;
-    private boolean hasMotor;
+    private final String marca;
+    private final String modelo;
+    private final float peso;
+    private final float ruedasSize;
+    private final boolean hasMotor;
     private final LocalDate fechaFab;
-    private float precio;
+    private final float precio;
 
     public Bicicleta(int REF, String marca, String modelo, float peso, float ruedasSize, boolean hasMotor, LocalDate fechaFab, float precio) {
         this.REF = REF;
@@ -31,41 +31,26 @@ public class Bicicleta {
         return marca;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
 
     public String getModelo() {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
 
     public float getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
-        this.peso = peso;
-    }
 
     public float getRuedasSize() {
         return ruedasSize;
     }
 
-    public void setRuedasSize(float ruedasSize) {
-        this.ruedasSize = ruedasSize;
-    }
 
     public boolean isHasMotor() {
         return hasMotor;
     }
 
-    public void setHasMotor(boolean hasMotor) {
-        this.hasMotor = hasMotor;
-    }
 
     public LocalDate getFechaFab() {
         return fechaFab;
@@ -75,9 +60,6 @@ public class Bicicleta {
         return precio;
     }
 
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
 
     @Override
     public String toString() {

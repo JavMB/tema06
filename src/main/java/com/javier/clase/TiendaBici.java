@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TiendaBici {
-    static Scanner sc = new Scanner(System.in);
+    public static Scanner sc = new Scanner(System.in);
     private final ItemBicicleta[] bicisModelos;
 
     //constructor recomendado
@@ -16,9 +16,9 @@ public class TiendaBici {
         System.out.println("Dime la referencia");
         int ref = Integer.parseInt(sc.nextLine());
 
-        for (int i = 0; i < bicisModelos.length; i++) {
-            if (bicisModelos[i] != null && bicisModelos[i].getBicicleta().getREF() == ref) {
-                bicisModelos[i].incrementarStock();
+        for (ItemBicicleta bicisModelo : bicisModelos) {
+            if (bicisModelo != null && bicisModelo.getBicicleta().getREF() == ref) {
+                bicisModelo.incrementarStock();
                 System.out.println("Bicicleta encontrada. Stock actualizado.");
                 return;
             }
@@ -39,12 +39,12 @@ public class TiendaBici {
         System.out.println("Dime el precio");
         float precio = Float.parseFloat(sc.nextLine());
 
-        Bicicleta b1=new Bicicleta(ref,marca,modelo,peso,ruedasSize,hasMotor,fechaFab,precio);
+        Bicicleta b1 = new Bicicleta(ref, marca, modelo, peso, ruedasSize, hasMotor, fechaFab, precio);
 
 
         for (int i = 0; i < bicisModelos.length; i++) {
             if (bicisModelos[i] == null) {
-                bicisModelos[i] = new ItemBicicleta(b1,1);
+                bicisModelos[i] = new ItemBicicleta(b1, 1);
                 return;
             }
         }
@@ -55,10 +55,10 @@ public class TiendaBici {
         System.out.println("Dime la referencia");
         int ref = Integer.parseInt(sc.nextLine());
 
-        for (int i = 0; i < bicisModelos.length; i++) {
-            if (bicisModelos[i] != null && bicisModelos[i].getBicicleta().getREF() == ref && bicisModelos[i].getStock() > 0) {
-                bicisModelos[i].decrementarStock();
-                System.out.println("Bicicleta " + bicisModelos[i].getBicicleta().getModelo() + " vendida correctamente");
+        for (ItemBicicleta bicisModelo : bicisModelos) {
+            if (bicisModelo != null && bicisModelo.getBicicleta().getREF() == ref && bicisModelo.getStock() > 0) {
+                bicisModelo.decrementarStock();
+                System.out.println("Bicicleta " + bicisModelo.getBicicleta().getModelo() + " vendida correctamente");
                 return;
             }
         }
@@ -123,7 +123,7 @@ public class TiendaBici {
         int capacidad = bicisModelos.length;
         int index = 0;
 
-        // Para la primera marca
+
         System.out.println("Dime cantidad para la marca " + marca1 + " (máximo: " + (capacidad - index) + "):");
         int cantidad1 = Integer.parseInt(sc.nextLine());
         for (int i = 0; i < cantidad1 && index < capacidad; i++, index++) {
@@ -131,7 +131,7 @@ public class TiendaBici {
             bicisModelos[index] = new ItemBicicleta(bici, rnd.nextInt(11));
         }
 
-        // Para la segunda marca
+
         System.out.println("Dime cantidad para la marca " + marca2 + " (máximo: " + (capacidad - index) + "):");
         int cantidad2 = Integer.parseInt(sc.nextLine());
         for (int i = 0; i < cantidad2 && index < capacidad; i++, index++) {
@@ -139,7 +139,7 @@ public class TiendaBici {
             bicisModelos[index] = new ItemBicicleta(bici, rnd.nextInt(11));
         }
 
-        // Para la tercera marca
+
         System.out.println("Dime cantidad para la marca " + marca3 + " (máximo: " + (capacidad - index) + "):");
         int cantidad3 = Integer.parseInt(sc.nextLine());
         for (int i = 0; i < cantidad3 && index < capacidad; i++, index++) {
@@ -175,28 +175,5 @@ public class TiendaBici {
         return Integer.parseInt(sc.nextLine());
     }
 
-    public static void main(String[] args) {
-        TiendaBici tienda1 = new TiendaBici(20);
-        tienda1.rellenarTienda(sc);
-        int opcion, opcion2;
-        do {
-            opcion = menuBicis(sc);
-            switch (opcion) {
-                case 1 -> tienda1.anadirBici(sc);
-                case 2 -> tienda1.venderBici(sc);
-                case 3 -> {
-                    do {
-                        opcion2 = menuConsultas(sc);
-                        switch (opcion2) {
-                            case 1 -> tienda1.consultaReferencia(sc);
-                            case 2 -> tienda1.consultaPorMarca(sc);
-                            case 3 -> tienda1.consultaPorModelo(sc);
-                        }
-                    } while (opcion2 != 0);
-                }
-                case 4 -> tienda1.mostrarStock();
-                default -> System.out.println("Introduce del 1 al 4");
-            }
-        } while (opcion != 0);
-    }
+
 }
