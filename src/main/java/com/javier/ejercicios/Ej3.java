@@ -1,9 +1,9 @@
 package com.javier.ejercicios;
-import com.javier.clase.GestionAlumnos;
+import com.javier.clases.GestionAlumnos;
 import java.util.Random;
 import java.util.Scanner;
-import static com.javier.clase.GestionAlumnos.menuAlumnos;
-import static com.javier.clase.GestionAlumnos.menuConsultas;
+import static com.javier.clases.GestionAlumnos.menuAlumnos;
+import static com.javier.clases.GestionAlumnos.menuConsultas;
 
 public class Ej3 {
     public static void main(String[] args) {

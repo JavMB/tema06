@@ -1,4 +1,5 @@
-package com.javier.pilascolas.Ej7;
+package com.javier.pilascolas.clases;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;

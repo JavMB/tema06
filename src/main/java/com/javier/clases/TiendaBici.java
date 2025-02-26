@@ -1,10 +1,12 @@
-package com.javier.clase;
+package com.javier.clases;
+import net.datafaker.Faker;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.Scanner;
 
+
+
 public class TiendaBici {
-    public static Scanner sc = new Scanner(System.in);
     private final ItemBicicleta[] bicisModelos;
 
     //constructor recomendado
@@ -113,38 +115,27 @@ public class TiendaBici {
 
     }
 
-    public void rellenarTienda(Scanner sc) {
+    public void rellenarTienda() {
         Random rnd = new Random();
-        System.out.println("Dime 3 marcas random...");
-        String marca1 = sc.nextLine();
-        String marca2 = sc.nextLine();
-        String marca3 = sc.nextLine();
+        Faker faker = new Faker();
 
         int capacidad = bicisModelos.length;
         int index = 0;
 
-
-        System.out.println("Dime cantidad para la marca " + marca1 + " (máximo: " + (capacidad - index) + "):");
-        int cantidad1 = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i < cantidad1 && index < capacidad; i++, index++) {
-            Bicicleta bici = new Bicicleta(index, marca1, "v" + index, 50, 5, true, LocalDate.now(), 500);
-            bicisModelos[index] = new ItemBicicleta(bici, rnd.nextInt(11));
-        }
-
-
-        System.out.println("Dime cantidad para la marca " + marca2 + " (máximo: " + (capacidad - index) + "):");
-        int cantidad2 = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i < cantidad2 && index < capacidad; i++, index++) {
-            Bicicleta bici = new Bicicleta(index, marca2, "v" + index, 50, 5, true, LocalDate.now(), 500);
-            bicisModelos[index] = new ItemBicicleta(bici, rnd.nextInt(11));
-        }
+        for (int i = 0; i < capacidad; i++) {
+            String marca = faker.company().name();
+            String modelo = faker.commerce().productName();
+            float peso = rnd.nextFloat(10) + 5; // Peso aleatorio entre 5 y 15 kg
+            float ruedasSize = rnd.nextFloat(4) + 20; // Tamaño de ruedas entre 20 y 24"
+            boolean hasMotor = rnd.nextBoolean();
+            LocalDate fechaFab = LocalDate.now().minusYears(rnd.nextInt(5)); // Fecha aleatoria en los últimos 5 años
+            double precio = faker.number().randomDouble(2, 100, 2000); // Precio entre 100 y 2000$
 
 
-        System.out.println("Dime cantidad para la marca " + marca3 + " (máximo: " + (capacidad - index) + "):");
-        int cantidad3 = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i < cantidad3 && index < capacidad; i++, index++) {
-            Bicicleta bici = new Bicicleta(index, marca3, "v" + index, 50, 5, true, LocalDate.now(), 500);
-            bicisModelos[index] = new ItemBicicleta(bici, rnd.nextInt(11));
+            Bicicleta bici = new Bicicleta(i, marca, modelo, peso, ruedasSize, hasMotor, fechaFab, precio);
+            bicisModelos[i] = new ItemBicicleta(bici, rnd.nextInt(11));
+
+            System.out.println("Añadida bici: " + bici);
         }
     }
 

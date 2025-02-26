@@ -1,4 +1,4 @@
-package com.javier.clase;
+package com.javier.clases;
 import java.time.LocalDate;
 
 public class Bicicleta {
@@ -9,9 +9,9 @@ public class Bicicleta {
     private final float ruedasSize;
     private final boolean hasMotor;
     private final LocalDate fechaFab;
-    private final float precio;
+    private final double precio;
 
-    public Bicicleta(int REF, String marca, String modelo, float peso, float ruedasSize, boolean hasMotor, LocalDate fechaFab, float precio) {
+    public Bicicleta(int REF, String marca, String modelo, float peso, float ruedasSize, boolean hasMotor, LocalDate fechaFab, double precio) {
         this.REF = REF;
         this.marca = marca;
         this.modelo = modelo;
@@ -56,7 +56,7 @@ public class Bicicleta {
         return fechaFab;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 

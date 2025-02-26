@@ -1,6 +1,6 @@
-package com.javier.pilascolas.Ej7;
+package com.javier.pilascolas.clases;
 
-import com.javier.pilascolas.Cola;
+import com.javier.pilascolas.colecciones.Cola;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;

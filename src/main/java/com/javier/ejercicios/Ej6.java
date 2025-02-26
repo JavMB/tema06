@@ -1,12 +1,15 @@
 package com.javier.ejercicios;
-import com.javier.clase.TiendaBici;
-import static com.javier.clase.TiendaBici.*;
+import com.javier.clases.TiendaBici;
+import java.util.Scanner;
+import static com.javier.clases.TiendaBici.menuBicis;
+import static com.javier.clases.TiendaBici.menuConsultas;
 
 public class Ej6
 {
+    public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         TiendaBici tienda1 = new TiendaBici(20);
-        tienda1.rellenarTienda(sc);
+        tienda1.rellenarTienda();
         int opcion, opcion2;
         do {
             opcion = menuBicis(sc);

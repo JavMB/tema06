@@ -1,5 +1,5 @@
 package com.javier.ejercicios;
-import com.javier.clase.Asignatura;
+import com.javier.clases.Asignatura;
 
 public class Ej2 {
     public static void main(String[] args) {

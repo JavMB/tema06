@@ -1,11 +1,8 @@
-package com.javier.clase;
-import lombok.Getter;
-import lombok.Setter;
+package com.javier.clases;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+
 public class Coche {
 
     public enum TipoCoche {
@@ -88,8 +85,4 @@ public class Coche {
                 '}';
     }
 
-    public static void main(String[] args) {
-        Coche c1=new Coche();
-        System.out.println(c1.getColor());
-    }
 }

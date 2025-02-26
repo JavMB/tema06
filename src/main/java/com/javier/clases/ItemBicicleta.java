@@ -1,4 +1,4 @@
-package com.javier.clase;
+package com.javier.clases;
 
 public class ItemBicicleta {
     private final Bicicleta bicicleta;

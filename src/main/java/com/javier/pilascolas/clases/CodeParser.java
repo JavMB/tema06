@@ -1,6 +1,6 @@
-package com.javier.pilascolas.Ej3;
+package com.javier.pilascolas.clases;
 import com.javier.lib.Escaner;
-import com.javier.pilascolas.Pila;
+import com.javier.pilascolas.colecciones.Pila;
 
 import java.io.File;
 

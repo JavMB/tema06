@@ -1,4 +1,4 @@
-package com.javier.pilascolas.Ej7;
+package com.javier.pilascolas.clases;
 import java.util.Random;
 
 public class Medico {

@@ -1,4 +1,4 @@
-package com.javier.clase;
+package com.javier.clases;
 
 public class Circunferencia {
     private Punto centro;
