@@ -6,12 +6,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GestionAlumnos {
-
+    //todo arreglar metodos, entrada salida al main
     private final Alumno[] alumnos;
 
     public GestionAlumnos(int capacidadMaxima) {
         alumnos = new Alumno[capacidadMaxima];
     }
+    //constructor de copia
 
 
     public void generarAlumnos(int cantidad, Random rnd, String[] nombres, String[] apellidos) {
@@ -30,34 +31,6 @@ public class GestionAlumnos {
 
             alumnos[i] = new Alumno(nia, nombre, apellido, fecha, grupo, telefono);
         }
-    }
-
-
-    public static int menuAlumnos() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("*********************\n" +
-                "1. Nuevo alumno …\n" +
-                "2. Baja de alumno …\n" +
-                "3. Consultas …\n" +
-                "------------------------------\n" +
-                "0. Salir");
-        return sc.nextInt();
-
-    }
-
-    public static int menuConsultas() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("***************\n" +
-                "** CONSULTAS **\n" +
-                "***************\n" +
-                "1. Por grupo …\n" +
-                "2. Por edad ...\n" +
-                "3. Por nia ...\n" +
-                "4. Por apellidos …\n" +
-                "--------------------\n" +
-                "0. Volver al menú principal");
-        return sc.nextInt();
-
     }
 
 

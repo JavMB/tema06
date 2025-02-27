@@ -2,8 +2,6 @@ package com.javier.ejercicios;
 import com.javier.clases.GestionAlumnos;
 import java.util.Random;
 import java.util.Scanner;
-import static com.javier.clases.GestionAlumnos.menuAlumnos;
-import static com.javier.clases.GestionAlumnos.menuConsultas;
 
 public class Ej3 {
     public static void main(String[] args) {
@@ -45,6 +43,32 @@ public class Ej3 {
 
         } while (opcion != 0);
 
+
+    }
+    public static int menuAlumnos() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("*********************\n" +
+                "1. Nuevo alumno …\n" +
+                "2. Baja de alumno …\n" +
+                "3. Consultas …\n" +
+                "------------------------------\n" +
+                "0. Salir");
+        return sc.nextInt();
+
+    }
+
+    public static int menuConsultas() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("***************\n" +
+                "** CONSULTAS **\n" +
+                "***************\n" +
+                "1. Por grupo …\n" +
+                "2. Por edad ...\n" +
+                "3. Por nia ...\n" +
+                "4. Por apellidos …\n" +
+                "--------------------\n" +
+                "0. Volver al menú principal");
+        return sc.nextInt();
 
     }
 }
